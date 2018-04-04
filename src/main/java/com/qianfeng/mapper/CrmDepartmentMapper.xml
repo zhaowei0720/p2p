@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qianfeng.mapper.CrmDepartmentMapper" >
+  <resultMap id="BaseResultMap" type="com.qianfeng.pojo.CrmDepartment" >
+    <id column="depId" property="depid" jdbcType="VARCHAR" />
+    <result column="depName" property="depname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    depId, depName
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qianfeng.pojo.CrmDepartmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from crm_department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_department
+    where depId = #{depid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from crm_department
+    where depId = #{depid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qianfeng.pojo.CrmDepartmentExample" >
+    delete from crm_department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qianfeng.pojo.CrmDepartment" >
+    insert into crm_department (depId, depName)
+    values (#{depid,jdbcType=VARCHAR}, #{depname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianfeng.pojo.CrmDepartment" >
+    insert into crm_department
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="depid != null" >
+        depId,
+      </if>
+      <if test="depname != null" >
+        depName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="depid != null" >
+        #{depid,jdbcType=VARCHAR},
+      </if>
+      <if test="depname != null" >
+        #{depname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qianfeng.pojo.CrmDepartmentExample" resultType="java.lang.Integer" >
+    select count(*) from crm_department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update crm_department
+    <set >
+      <if test="record.depid != null" >
+        depId = #{record.depid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.depname != null" >
+        depName = #{record.depname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update crm_department
+    set depId = #{record.depid,jdbcType=VARCHAR},
+      depName = #{record.depname,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianfeng.pojo.CrmDepartment" >
+    update crm_department
+    <set >
+      <if test="depname != null" >
+        depName = #{depname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where depId = #{depid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianfeng.pojo.CrmDepartment" >
+    update crm_department
+    set depName = #{depname,jdbcType=VARCHAR}
+    where depId = #{depid,jdbcType=VARCHAR}
+  </update>
+</mapper>

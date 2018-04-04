@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qianfeng.mapper.CrmCourseTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.qianfeng.pojo.CrmCourseType" >
+    <id column="courseTypeId" property="coursetypeid" jdbcType="VARCHAR" />
+    <result column="courseCost" property="coursecost" jdbcType="DOUBLE" />
+    <result column="total" property="total" jdbcType="INTEGER" />
+    <result column="courseName" property="coursename" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    courseTypeId, courseCost, total, courseName, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qianfeng.pojo.CrmCourseTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from crm_course_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_course_type
+    where courseTypeId = #{coursetypeid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from crm_course_type
+    where courseTypeId = #{coursetypeid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qianfeng.pojo.CrmCourseTypeExample" >
+    delete from crm_course_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qianfeng.pojo.CrmCourseType" >
+    insert into crm_course_type (courseTypeId, courseCost, total, 
+      courseName, remark)
+    values (#{coursetypeid,jdbcType=VARCHAR}, #{coursecost,jdbcType=DOUBLE}, #{total,jdbcType=INTEGER}, 
+      #{coursename,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianfeng.pojo.CrmCourseType" >
+    insert into crm_course_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="coursetypeid != null" >
+        courseTypeId,
+      </if>
+      <if test="coursecost != null" >
+        courseCost,
+      </if>
+      <if test="total != null" >
+        total,
+      </if>
+      <if test="coursename != null" >
+        courseName,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="coursetypeid != null" >
+        #{coursetypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="coursecost != null" >
+        #{coursecost,jdbcType=DOUBLE},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=INTEGER},
+      </if>
+      <if test="coursename != null" >
+        #{coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qianfeng.pojo.CrmCourseTypeExample" resultType="java.lang.Integer" >
+    select count(*) from crm_course_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update crm_course_type
+    <set >
+      <if test="record.coursetypeid != null" >
+        courseTypeId = #{record.coursetypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coursecost != null" >
+        courseCost = #{record.coursecost,jdbcType=DOUBLE},
+      </if>
+      <if test="record.total != null" >
+        total = #{record.total,jdbcType=INTEGER},
+      </if>
+      <if test="record.coursename != null" >
+        courseName = #{record.coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update crm_course_type
+    set courseTypeId = #{record.coursetypeid,jdbcType=VARCHAR},
+      courseCost = #{record.coursecost,jdbcType=DOUBLE},
+      total = #{record.total,jdbcType=INTEGER},
+      courseName = #{record.coursename,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianfeng.pojo.CrmCourseType" >
+    update crm_course_type
+    <set >
+      <if test="coursecost != null" >
+        courseCost = #{coursecost,jdbcType=DOUBLE},
+      </if>
+      <if test="total != null" >
+        total = #{total,jdbcType=INTEGER},
+      </if>
+      <if test="coursename != null" >
+        courseName = #{coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where courseTypeId = #{coursetypeid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianfeng.pojo.CrmCourseType" >
+    update crm_course_type
+    set courseCost = #{coursecost,jdbcType=DOUBLE},
+      total = #{total,jdbcType=INTEGER},
+      courseName = #{coursename,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where courseTypeId = #{coursetypeid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qianfeng.mapper.CrmPostMapper" >
+  <resultMap id="BaseResultMap" type="com.qianfeng.pojo.CrmPost" >
+    <id column="postId" property="postid" jdbcType="VARCHAR" />
+    <result column="postName" property="postname" jdbcType="VARCHAR" />
+    <result column="depId" property="depid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    postId, postName, depId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qianfeng.pojo.CrmPostExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from crm_post
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_post
+    where postId = #{postid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from crm_post
+    where postId = #{postid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qianfeng.pojo.CrmPostExample" >
+    delete from crm_post
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qianfeng.pojo.CrmPost" >
+    insert into crm_post (postId, postName, depId
+      )
+    values (#{postid,jdbcType=VARCHAR}, #{postname,jdbcType=VARCHAR}, #{depid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianfeng.pojo.CrmPost" >
+    insert into crm_post
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="postid != null" >
+        postId,
+      </if>
+      <if test="postname != null" >
+        postName,
+      </if>
+      <if test="depid != null" >
+        depId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="postid != null" >
+        #{postid,jdbcType=VARCHAR},
+      </if>
+      <if test="postname != null" >
+        #{postname,jdbcType=VARCHAR},
+      </if>
+      <if test="depid != null" >
+        #{depid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qianfeng.pojo.CrmPostExample" resultType="java.lang.Integer" >
+    select count(*) from crm_post
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update crm_post
+    <set >
+      <if test="record.postid != null" >
+        postId = #{record.postid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postname != null" >
+        postName = #{record.postname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.depid != null" >
+        depId = #{record.depid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update crm_post
+    set postId = #{record.postid,jdbcType=VARCHAR},
+      postName = #{record.postname,jdbcType=VARCHAR},
+      depId = #{record.depid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianfeng.pojo.CrmPost" >
+    update crm_post
+    <set >
+      <if test="postname != null" >
+        postName = #{postname,jdbcType=VARCHAR},
+      </if>
+      <if test="depid != null" >
+        depId = #{depid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where postId = #{postid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianfeng.pojo.CrmPost" >
+    update crm_post
+    set postName = #{postname,jdbcType=VARCHAR},
+      depId = #{depid,jdbcType=VARCHAR}
+    where postId = #{postid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="day19_crm:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="day19_crm.war">
+      <element id="artifact" artifact-name="day19_crm:war exploded" />
+    </root>
+  </artifact>
+</component>

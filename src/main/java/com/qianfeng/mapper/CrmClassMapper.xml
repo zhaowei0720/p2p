@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qianfeng.mapper.CrmClassMapper" >
+  <resultMap id="BaseResultMap" type="com.qianfeng.pojo.CrmClass" >
+    <id column="classId" property="classid" jdbcType="VARCHAR" />
+    <result column="courseTypeId" property="coursetypeid" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="beginTime" property="begintime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="totalCount" property="totalcount" jdbcType="INTEGER" />
+    <result column="upgradeCount" property="upgradecount" jdbcType="INTEGER" />
+    <result column="changeCount" property="changecount" jdbcType="INTEGER" />
+    <result column="runoffCount" property="runoffcount" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="uploadTime" property="uploadtime" jdbcType="TIMESTAMP" />
+    <result column="uploadPath" property="uploadpath" jdbcType="VARCHAR" />
+    <result column="uploadFilename" property="uploadfilename" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    classId, courseTypeId, name, beginTime, endTime, status, totalCount, upgradeCount, 
+    changeCount, runoffCount, remark, uploadTime, uploadPath, uploadFilename
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qianfeng.pojo.CrmClassExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from crm_class
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_class
+    where classId = #{classid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from crm_class
+    where classId = #{classid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qianfeng.pojo.CrmClassExample" >
+    delete from crm_class
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qianfeng.pojo.CrmClass" >
+    insert into crm_class (classId, courseTypeId, name, 
+      beginTime, endTime, status, 
+      totalCount, upgradeCount, changeCount, 
+      runoffCount, remark, uploadTime, 
+      uploadPath, uploadFilename)
+    values (#{classid,jdbcType=VARCHAR}, #{coursetypeid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{begintime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, 
+      #{totalcount,jdbcType=INTEGER}, #{upgradecount,jdbcType=INTEGER}, #{changecount,jdbcType=INTEGER}, 
+      #{runoffcount,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{uploadtime,jdbcType=TIMESTAMP}, 
+      #{uploadpath,jdbcType=VARCHAR}, #{uploadfilename,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianfeng.pojo.CrmClass" >
+    insert into crm_class
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="classid != null" >
+        classId,
+      </if>
+      <if test="coursetypeid != null" >
+        courseTypeId,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="begintime != null" >
+        beginTime,
+      </if>
+      <if test="endtime != null" >
+        endTime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="totalcount != null" >
+        totalCount,
+      </if>
+      <if test="upgradecount != null" >
+        upgradeCount,
+      </if>
+      <if test="changecount != null" >
+        changeCount,
+      </if>
+      <if test="runoffcount != null" >
+        runoffCount,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="uploadtime != null" >
+        uploadTime,
+      </if>
+      <if test="uploadpath != null" >
+        uploadPath,
+      </if>
+      <if test="uploadfilename != null" >
+        uploadFilename,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="classid != null" >
+        #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="coursetypeid != null" >
+        #{coursetypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="begintime != null" >
+        #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="totalcount != null" >
+        #{totalcount,jdbcType=INTEGER},
+      </if>
+      <if test="upgradecount != null" >
+        #{upgradecount,jdbcType=INTEGER},
+      </if>
+      <if test="changecount != null" >
+        #{changecount,jdbcType=INTEGER},
+      </if>
+      <if test="runoffcount != null" >
+        #{runoffcount,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null" >
+        #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadpath != null" >
+        #{uploadpath,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadfilename != null" >
+        #{uploadfilename,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qianfeng.pojo.CrmClassExample" resultType="java.lang.Integer" >
+    select count(*) from crm_class
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update crm_class
+    <set >
+      <if test="record.classid != null" >
+        classId = #{record.classid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coursetypeid != null" >
+        courseTypeId = #{record.coursetypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.begintime != null" >
+        beginTime = #{record.begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null" >
+        endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalcount != null" >
+        totalCount = #{record.totalcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.upgradecount != null" >
+        upgradeCount = #{record.upgradecount,jdbcType=INTEGER},
+      </if>
+      <if test="record.changecount != null" >
+        changeCount = #{record.changecount,jdbcType=INTEGER},
+      </if>
+      <if test="record.runoffcount != null" >
+        runoffCount = #{record.runoffcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uploadtime != null" >
+        uploadTime = #{record.uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uploadpath != null" >
+        uploadPath = #{record.uploadpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uploadfilename != null" >
+        uploadFilename = #{record.uploadfilename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update crm_class
+    set classId = #{record.classid,jdbcType=VARCHAR},
+      courseTypeId = #{record.coursetypeid,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      beginTime = #{record.begintime,jdbcType=TIMESTAMP},
+      endTime = #{record.endtime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=VARCHAR},
+      totalCount = #{record.totalcount,jdbcType=INTEGER},
+      upgradeCount = #{record.upgradecount,jdbcType=INTEGER},
+      changeCount = #{record.changecount,jdbcType=INTEGER},
+      runoffCount = #{record.runoffcount,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      uploadTime = #{record.uploadtime,jdbcType=TIMESTAMP},
+      uploadPath = #{record.uploadpath,jdbcType=VARCHAR},
+      uploadFilename = #{record.uploadfilename,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianfeng.pojo.CrmClass" >
+    update crm_class
+    <set >
+      <if test="coursetypeid != null" >
+        courseTypeId = #{coursetypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="begintime != null" >
+        beginTime = #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="totalcount != null" >
+        totalCount = #{totalcount,jdbcType=INTEGER},
+      </if>
+      <if test="upgradecount != null" >
+        upgradeCount = #{upgradecount,jdbcType=INTEGER},
+      </if>
+      <if test="changecount != null" >
+        changeCount = #{changecount,jdbcType=INTEGER},
+      </if>
+      <if test="runoffcount != null" >
+        runoffCount = #{runoffcount,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null" >
+        uploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadpath != null" >
+        uploadPath = #{uploadpath,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadfilename != null" >
+        uploadFilename = #{uploadfilename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where classId = #{classid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianfeng.pojo.CrmClass" >
+    update crm_class
+    set courseTypeId = #{coursetypeid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      beginTime = #{begintime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      totalCount = #{totalcount,jdbcType=INTEGER},
+      upgradeCount = #{upgradecount,jdbcType=INTEGER},
+      changeCount = #{changecount,jdbcType=INTEGER},
+      runoffCount = #{runoffcount,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      uploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      uploadPath = #{uploadpath,jdbcType=VARCHAR},
+      uploadFilename = #{uploadfilename,jdbcType=VARCHAR}
+    where classId = #{classid,jdbcType=VARCHAR}
+  </update>
+</mapper>
