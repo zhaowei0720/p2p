@@ -1,4 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+﻿<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.qianfeng</groupId>
@@ -7,7 +7,7 @@
     <version>1.0-SNAPSHOT</version>
     <name>day19_crm Maven Webapp</name>
     <url>http://maven.apache.org</url>
-    <!-- 集中定义依赖版本号 -->
+    <!-- 集中定义依赖版本号 -->   
     <properties>
         <junit.version>4.12</junit.version>
         <spring.version>4.2.4.RELEASE</spring.version>
